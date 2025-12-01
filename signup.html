@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #1e7e34;
+    }
+    .link-btn {
+      background-color: transparent;
+      color: #007BFF;
+      text-decoration: underline;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    .link-btn:hover {
+      color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Create Account</h2>
+
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+
+    <button id="signupBtn">Sign Up</button>
+    <button class="link-btn" id="signinBtn">Back to Sign In</button>
+
+    <p id="status"></p>
+  </div>
+
+  <script>
+    document.getElementById("signupBtn").addEventListener("click", async () => {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const statusEl = document.getElementById("status");
+
+      if (!username || !password) {
+        statusEl.textContent = "Please fill in all fields.";
+        return;
+      }
+
+      try {
+        const response = await fetch("/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password })
+        });
+
+        const result = await response.json();
+        if (result.status === "ok") {
+          window.location.href = "/home"; // Go to home page
+        } else {
+          statusEl.style.color = "red";
+          statusEl.textContent = result.message;
+        }
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = err;
+      }
+    });
+
+    document.getElementById("signinBtn").addEventListener("click", () => {
+      window.location.href = "/signin";
+    });
+  </script>
+</body>
+</html>
