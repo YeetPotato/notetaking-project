@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    button {
+      width: 200px;
+      padding: 12px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    #findBtn {
+      background-color: #28a745;
+    }
+    #findBtn:hover {
+      background-color: #218838;
+    }
+
+    #uploadBtn {
+      background-color: #007bff;
+    }
+    #uploadBtn:hover {
+      background-color: #0069d9;
+    }
+
+    #logoutBtn {
+      background-color: #dc3545;
+    }
+    #logoutBtn:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Your Dashboard</h1>
+
+  <button id="findBtn">Find Meeting</button>
+  <button id="uploadBtn">Upload Meeting</button>
+  <button id="logoutBtn">Log Out</button>
+
+  <script>
+    document.getElementById("findBtn").addEventListener("click", () => {
+      window.location.href = "/findmeeting";
+    });
+
+    document.getElementById("uploadBtn").addEventListener("click", () => {
+      window.location.href = "/uploadmeeting";
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      window.location.href = "/logout";
+    });
+  </script>
+</body>
+</html>
